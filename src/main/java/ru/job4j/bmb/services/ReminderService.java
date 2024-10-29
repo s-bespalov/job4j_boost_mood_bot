@@ -1,4 +1,4 @@
-package ru.job4j.boostmood.bot;
+package ru.job4j.bmb.services;
 
 public class ReminderService {
 }
