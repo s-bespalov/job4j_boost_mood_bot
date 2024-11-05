@@ -5,15 +5,15 @@ import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MoodService {
+public class RecommendationService {
 
     @PostConstruct
     public void init() {
-        System.out.println("Bean 'MoodService' is going through @PostConstruct init.");
+        System.out.println("Bean 'RecommendationService' is going through @PostConstruct init.");
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println("Bean 'MoodService' will be destroyed via @PreDestroy.");
+        System.out.println("Bean 'RecommendationService' will be destroyed via @PreDestroy.");
     }
 }
