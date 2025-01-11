@@ -26,7 +26,6 @@ public class TelegramBotService implements BeanNameAware {
     }
 
     public void receive(Content content) {
-        handler.receive(content);
     }
 
     @Override
