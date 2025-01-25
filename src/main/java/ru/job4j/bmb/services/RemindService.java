@@ -12,13 +12,13 @@ import java.time.ZoneId;
 
 @Service
 public class RemindService {
-    private final SendContent sentContent;
+    private final SendContent sendContent;
     private final MoodLogRepository moodLogRepository;
     private final TgUI tgUI;
 
     public RemindService(SendContent sendContent,
                            MoodLogRepository moodLogRepository, TgUI tgUI) {
-        this.sentContent = sendContent;
+        this.sendContent = sendContent;
         this.moodLogRepository = moodLogRepository;
         this.tgUI = tgUI;
     }
@@ -38,7 +38,7 @@ public class RemindService {
             var content = new Content(user.getChatId());
             content.setText("Как настроение?");
             content.setMarkup(tgUI.buildButtons());
-            sentContent.send(content);
+            sendContent.send(content);
         }
     }
 }

@@ -1,7 +1,9 @@
 package ru.job4j.bmb.services;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import ru.job4j.bmb.content.Content;
+import ru.job4j.bmb.events.UserEvent;
 import ru.job4j.bmb.model.*;
 import ru.job4j.bmb.repository.AchievementRepository;
 import ru.job4j.bmb.repository.MoodContentRepository;
@@ -12,7 +14,6 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -25,6 +26,7 @@ public class MoodService {
     private final UserRepository userRepository;
     private final AchievementRepository achievementRepository;
     private final MoodContentRepository moodContentRepository;
+    private final ApplicationEventPublisher publisher;
     private final DateTimeFormatter formatter = DateTimeFormatter
             .ofPattern("dd-MM-yyyy HH:mm")
             .withZone(ZoneId.systemDefault());
@@ -33,12 +35,14 @@ public class MoodService {
                        RecommendationEngine recommendationEngine,
                        UserRepository userRepository,
                        AchievementRepository achievementRepository,
-                       MoodContentRepository moodContentRepository) {
+                       MoodContentRepository moodContentRepository,
+                       ApplicationEventPublisher publisher) {
         this.moodLogRepository = moodLogRepository;
         this.recommendationEngine = recommendationEngine;
         this.userRepository = userRepository;
         this.achievementRepository = achievementRepository;
         this.moodContentRepository = moodContentRepository;
+        this.publisher = publisher;
     }
 
     public Content chooseMood(User user, Long moodId) {
@@ -46,6 +50,7 @@ public class MoodService {
         var moodContent = moodContentRepository.findById(moodId);
         moodContent.ifPresent(value -> moodLogRepository
                 .save(new MoodLog(user, value.getMood(), Instant.now().getEpochSecond())));
+        publisher.publishEvent(new UserEvent(this, user));
         return content;
     }
 
