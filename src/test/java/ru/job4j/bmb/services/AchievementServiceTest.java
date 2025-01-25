@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 class AchievementServiceTest {
 
     @Test
-    public void WhenReceiveAchievement() {
+    public void whenReceiveAchievement() {
         var result = new ArrayList<Content>();
         var sendContent = new SendContent() {
             @Override
