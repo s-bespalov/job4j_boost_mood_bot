@@ -25,9 +25,9 @@ class AchievementServiceTest {
         var user = new User();
         user.setClientId(100);
         var userEvent = new UserEvent(this, user);
-        var excepted = "Сервис AchievementService получил событие UserEvent от вас";
+        var expected = "Сервис AchievementService получил событие UserEvent от вас";
         achievementService.onApplicationEvent(userEvent);
         var actual = result.iterator().next().getText();
-        assertThat(actual).isEqualTo(excepted);
+        assertThat(actual).isEqualTo(expected);
     }
 }
