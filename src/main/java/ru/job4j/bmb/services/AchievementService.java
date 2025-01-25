@@ -38,7 +38,7 @@ public class AchievementService implements BeanNameAware, ApplicationListener<Us
     public void onApplicationEvent(UserEvent event) {
         var user = event.getUser();
         var content = new Content(user.getChatId());
-        content.setText("Сервис AchievemtntService получил событие UserEvent от вас");
+        content.setText("Сервис AchievementService получил событие UserEvent от вас");
         sendContent.send(content);
     }
 }
