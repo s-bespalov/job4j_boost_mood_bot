@@ -21,3 +21,5 @@ out
 src/main/resources/application-secret.properties
 
 logs
+
+config/*
