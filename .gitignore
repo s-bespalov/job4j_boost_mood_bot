@@ -19,3 +19,5 @@ target
 out
 *.log
 src/main/resources/application-secret.properties
+
+logs
