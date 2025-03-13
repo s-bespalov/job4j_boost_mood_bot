@@ -18,6 +18,7 @@ public class TelegramFakeBotService extends TelegramLongPollingBot implements Se
                                  @Value("${telegram.bot.token}") String botToken) {
         super(botToken);
         this.botName = botName;
+        System.out.println("Im Fake Telegram Service");
     }
 
     @Override
